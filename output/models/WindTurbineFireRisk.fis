@@ -1,0 +1,80 @@
+[System]
+Name='WindTurbineFireRisk'
+Type='mamdani'
+Version=2.0
+NumInputs=5
+NumOutputs=1
+NumRules=17
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='sum'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Temperature'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'gaussmf',[0.12 0]
+MF2='Medium':'gaussmf',[0.1 0.5]
+MF3='High':'gaussmf',[0.12 1]
+
+[Input2]
+Name='TempRate'
+Range=[0 1]
+NumMFs=3
+MF1='Slow':'gaussmf',[0.12 0]
+MF2='Moderate':'gaussmf',[0.1 0.5]
+MF3='Fast':'gaussmf',[0.12 1]
+
+[Input3]
+Name='Smoke'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'gaussmf',[0.12 0]
+MF2='Medium':'gaussmf',[0.1 0.5]
+MF3='High':'gaussmf',[0.12 1]
+
+[Input4]
+Name='Gas'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'gaussmf',[0.12 0]
+MF2='Medium':'gaussmf',[0.1 0.5]
+MF3='High':'gaussmf',[0.12 1]
+
+[Input5]
+Name='LSTM_Prob'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'gaussmf',[0.1 0]
+MF2='Medium':'gaussmf',[0.12 0.5]
+MF3='High':'gaussmf',[0.1 1]
+
+[Output1]
+Name='RiskIndex'
+Range=[0 1]
+NumMFs=4
+MF1='Safe':'trimf',[0 0 0.25]
+MF2='Attention':'trimf',[0.1 0.35 0.55]
+MF3='Warning':'trimf',[0.45 0.65 0.85]
+MF4='Alarm':'trimf',[0.75 1 1]
+
+[Rules]
+1 1 1 1 1, 1 (1) : 1
+2 1 1 1 1, 2 (1) : 1
+3 1 1 1 1, 3 (1) : 1
+1 2 1 1 1, 2 (1) : 1
+1 3 1 1 1, 3 (1) : 1
+1 1 2 1 1, 2 (1) : 1
+1 1 1 2 1, 2 (1) : 1
+2 2 1 1 1, 2 (1) : 1
+3 2 1 1 1, 3 (1) : 1
+2 2 2 1 1, 3 (1) : 1
+3 3 2 1 1, 3 (1) : 1
+3 3 3 3 1, 4 (1) : 1
+1 1 1 1 3, 3 (1) : 1
+2 2 2 2 3, 4 (1) : 1
+3 3 3 3 3, 4 (1) : 1
+2 1 2 1 2, 2 (1) : 1
+2 2 2 2 2, 3 (1) : 1

@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# MATLAB
+*.asv
+*.mlx
+*.mat
+matlab_crash_dump*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Data (if any)
+*.csv
+*.npy
+*.npz
+
+# Simulink generated
+slprj/
+simulink_cache.xml
+
+# Temporary
+*.tmp
+*.bak
+*.log
